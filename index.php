@@ -80,7 +80,7 @@
                     Logout
                   </a>
                   <?php
-
+                    
                     session_start();
 
                     if(isset($_SESSION['id_usuario'])) {
@@ -91,7 +91,7 @@
                         </script>
                       ';
 
-                      if ($_SESSION["tipo_usuario"] == 3) {
+                      if (isset($_SESSION["tipo_usuario"])==3) {
                         echo '
                           <script>
                             document.querySelector("#city-register").style.display = "none";
