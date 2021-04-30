@@ -1,0 +1,14 @@
+section#tourist_attractions {
+  display: none;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  border-top: 3px solid #fff;
+  background-color: #fff;
+}
+
+.table {
+  background-color: #ccc;
+}
+/*# sourceMappingURL=index.css.map */

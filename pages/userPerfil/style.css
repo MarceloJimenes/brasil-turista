@@ -1,0 +1,44 @@
+.userBackground {
+  background-image: url(../../img/svg/userPerfilBack.svg);
+  background-size: 60vh;
+  background-repeat: no-repeat;
+  background-position: right;
+  margin: 0 20px;
+}
+
+p {
+  margin-top: 5px;
+}
+
+.form {
+  margin-right: 45vw;
+}
+
+.editar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+img {
+  margin: 0 15px;
+  width: 35px;
+  cursor: pointer;
+}
+
+.botoes {
+  width: 350px;
+  margin-bottom: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+/*# sourceMappingURL=style.css.map */

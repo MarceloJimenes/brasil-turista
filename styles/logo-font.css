@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Viga&display=swap");
+p.logo-title, p.logo-subtitle {
+  font-family: 'Viga', sans-serif;
+  text-shadow: 0px 0px 3px #000;
+  color: #33ccb8;
+}
+
+p.logo-title {
+  font-size: 60pt;
+}
+
+p.logo-title-menu {
+  font-size: 20pt;
+  color: #38e6ce;
+  text-shadow: 0px 0px 3px #000;
+}
+/*# sourceMappingURL=logo-font.css.map */

@@ -1,0 +1,21 @@
+body {
+  /* background-color: rgb(197, 195, 195); */
+  background-color: #7d92ee;
+}
+
+a.navbar-item:hover {
+  background-color: rgba(0, 0, 0, 0.068);
+  color: #fff;
+}
+
+.is-hero-background {
+  background-image: url(../img/svg/undraw_sunlight_tn7t.svg);
+  background-size: 100vw;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* #pontos-turisticos {
+  background-color: #575a89;
+} */
+/*# sourceMappingURL=backgrounds.css.map */

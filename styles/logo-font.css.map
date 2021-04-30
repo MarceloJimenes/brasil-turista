@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,OAAO,CAAC,iEAAI;AAEZ,AAAA,CAAC,AAAA,WAAW,EAAE,CAAC,AAAA,cAAc,CAAC;EAC5B,WAAW,EAAE,kBAAkB;EAC/B,WAAW,EAAE,gBAAgB;EAC7B,KAAK,EAAE,OAAO;CACf;;AAED,AAAA,CAAC,AAAA,WAAW,CAAC;EACX,SAAS,EAAE,IAAI;CAChB;;AAED,AAAA,CAAC,AAAA,gBAAgB,CAAC;EAChB,SAAS,EAAE,IAAI;EACf,KAAK,EAAE,OAAO;EACd,WAAW,EAAE,gBAAgB;CAC9B",
+    "sources": [
+        "logo-font.scss"
+    ],
+    "names": [],
+    "file": "logo-font.css"
+}
