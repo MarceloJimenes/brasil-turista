@@ -19,6 +19,12 @@
         $extension = explode(".", $fileName["name"]);
         $archiveName = md5(uniqid(time())).".".$extension[1];
         $up = move_uploaded_file($fileName["tmp_name"], "../../img/fotos_hosp/".$archiveName);
+
+        if (!$up) {
+          exit(json_encode(array('status' => 'false', 'reason' => 'Erro na tentaiva de upload da imagem.')));
+        }
+        exit(json_encode(array('status' => 'true', 'reason' => 'upload realizado com sucesso!')));
+
       }
     }
   }
