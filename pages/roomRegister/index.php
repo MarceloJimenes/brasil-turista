@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-Br">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!-- Links -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
@@ -11,7 +8,7 @@
   <link rel="stylesheet" href="../../styles/backgrounds.scss">
 	<link rel="stylesheet" href="../../styles/form.scss">
 
-	<title>Cadastro de Cidade</title>
+	<title>Cadastro de Quartos</title>
 </head>
 
 <body>
@@ -132,10 +129,10 @@
 
 					<form class="form" action="" method="post" enctype="multipart/form-data">
 
-						<h1 class="label has-text-centered">Cadastre uma Hospedagem</h1>
+						<h1 class="label has-text-centered">Cadastre um Quarto</h1>
 
 						<div class="control">
-							<label class="label">Digite o nome da Hospedagem: </label>
+							<label class="label">Digite o nome do Quarto: </label>
 							<input class="input" type="text" name="nome" placeholder="Hospedagem da Tia Ju" required/>
 						</div>
 
