@@ -152,45 +152,49 @@
 
 						<div class="control">
 							<label class="label">Digite o nome da Hospedagem: </label>
-							<input class="input" type="text" name="nome" required/>
+							<input class="input" type="text" name="nome" placeholder="Hospedagem da Tia Ju"/>
 						</div>
 
-						<label class="label">Escolha o estado: </label>
-
+            <label class="label" for="cidade">Cidade:</label>
 						<div class="select">
-							<select name="estado" required>
-								<option value=""></option>
-								<?php
-								$query = "SELECT id_estado, nome FROM estados";
-								$executa = mysqli_query($conexao, $query);
-								while ($estados = mysqli_fetch_array($executa)) {
-									echo "<option value='$estados[id_estado]'>$estados[nome]</option>";
-								}
-								?>
-							</select>
-						</div>
+              <select name="cidade" id="cidade" >
+                <option value="" disabled selected>Selecione:</option>
+                <?php
+                  $query ="SELECT id_cidade, nome FROM cidades";
+                  $dados = mysqli_query($conexao, $query);
+                  while($cidades = mysqli_fetch_array($dados)){
+                    echo"
+                      <option value='$cidades[id_cidade]'>$cidades[nome]</option>
+                    ";
+                  }
+                ?>
+              </select>
+            </div>
 
-						<div class="file">
+            <div class="control">
+              <label class="label" for="tel-cel">Nº Contato:</label>
+              <input class="input" type="text" id="tel-cel" name="tel-cel" placeholder="(XX) 00000-0000"/>
+            </div>
+
+            <div class="control">
+              <label class="label" for="email">E-mail da Hospedagem:</label>
+              <input class="input" type="email" id="email" name ="email" placeholder="hotel@gmail.com" />
+            </div>
+            
+            <label class="label" for="tp_hosp">Tipo de Hospedagem:</label>
+            <div class="select">
+                <select name="tp_hosp" id="tp_hosp">
+                  <option value="" disabled selected>Selecione:</option>
+                  <option value="0">Hotel</option>
+                  <option value="1">Hostel</option>
+                  <option value="2">Pousada</option>
+                  <option value="3">Resort</option>
+                </select>
+            </div>
+
+						<div class="control">
 							<label class="label">Foto:</label>
-							<input type="file" name="foto" required>
-						</div>
-
-						<div class="textarea-field">
-							<label class="label">Descreva a cidade turistica:</label>
-							<textarea name="descricao"></textarea>
-						</div>
-
-						<div class="checkbox-list">
-							<label class="label">Defina qual o tipo(s) de turismo da cidade:</label>
-
-							<?php
-							$querytt = "SELECT id_tipo_turismo, nome FROM tipo_turismo";
-							$executar = mysqli_query($conexao, $querytt);
-							while ($tt = mysqli_fetch_array($executar)) {
-								echo "<input name='tt[]' type='checkbox' value='$tt[id_tipo_turismo]'> $tt[nome] | ";
-							}
-							?>
-
+							<input type="file" name="foto" multiple>
 						</div>
 
 						<div class="botoes has-text-centered">
@@ -201,8 +205,13 @@
 				</div>
 			</div>
 
-		</section>
+      <?php
+        var_dump($_POST);
+        var_dump($_FILES);
+        
 
+      ?>
+		</section>
 	</main>
 </body>
 </html>
