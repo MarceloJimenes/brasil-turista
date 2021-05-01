@@ -70,6 +70,9 @@
                   <a class="navbar-item" href="../../index.php">
                     Página inicial
                   </a>
+                  <a class="navbar-item" id="hosp-register" href="../hospRegister/index.php">
+                    Cadastrar Hospedagem
+                  </a>
                   <a class="navbar-item" id="city-register" href="../cityRegister/cadastro_cidade.php">
                     Cadastrar cidade
                   </a>
