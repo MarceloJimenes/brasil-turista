@@ -4,10 +4,15 @@
 
     $countFiles = count($fileName['name']);
 
-    for ($i = 0; $i < $countFiles; $i++) {
-      if (!preg_match("/(.)+(jpg|JPG|jpeg|JPEG|gif|GIF|png|PNG|svg|SVG|bmp|BMP)/", $fileName['name'])) {
+    for($j =0; $j < $countFiles; $j++) {
 
-        exit(json_encode(array('status' => 'false', 'reason' => 'Extensão de arquivo não suportada.')));
+      $file = $fileName['name'][$j];
+
+      if (!preg_match("/(.)+(jpg|JPG|jpeg|JPEG|gif|GIF|png|PNG|svg|SVG|bmp|BMP)/", $fileName['name'][$j])) {
+
+        $result = array("status" => "false", "reason" => "Extensão do arquivo $file não é suportada.");
+        return $result;
+
       } else {
     
         //manipulando tamanho da imagem
@@ -15,23 +20,30 @@
         $height = 1000;
         //$tamanho = 2000000;
     
-        $dimensions = getimagesize($fileName['tmp_name']);
+        $dimensions = getimagesize($fileName['tmp_name'][$j]);
     
         if ($dimensions[0] > $width || $dimensions[1] > $height) {
-          exit(json_encode(array('status' => 'false', 'reason' => 'Dimensões acima das suportadas.')));
-        } else {
-          $extension = explode(".", $fileName["name"]);
-          $archiveName = md5(uniqid(time())).".".$extension[1];
-          $up = move_uploaded_file($fileName["tmp_name"], "../../img/fotos_hosp/".$archiveName);
+          $result = array("status" => "false", "reason" => "Dimensões do arquivo $file são acima das suportadas.");
 
-          if (!$up) {
-            exit(json_encode(array('status' => 'false', 'reason' => 'Erro na tentaiva de upload da imagem.')));
-          }
-          exit(json_encode(array('status' => 'true', 'reason' => 'upload realizado com sucesso!')));
-
+          return $result;
         }
       }
     }
+
+    for ($i = 0; $i < $countFiles; $i++) {
+      
+      $extension = explode(".", $fileName["name"][$i]);
+      $archiveName = md5(uniqid(time())).".".$extension[1];
+      $up = move_uploaded_file($fileName["tmp_name"][$i], "../../img/fotos_hosp/".$archiveName);
+
+      if (!$up) {
+        $result = array('status' => 'false', 'reason' => 'Erro na tentaiva de upload da imagem.');
+        return $result;
+      }
+          
+    }
+    $result = array('status' => 'true', 'reason' => 'upload realizado com sucesso!');
+    return $result;
   }
 
 ?>
