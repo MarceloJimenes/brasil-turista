@@ -30,6 +30,9 @@
       }
     }
 
+    $files = array();
+
+
     for ($i = 0; $i < $countFiles; $i++) {
       
       $extension = explode(".", $fileName["name"][$i]);
@@ -39,11 +42,12 @@
       if (!$up) {
         $result = array('status' => 'false', 'reason' => 'Erro na tentaiva de upload da imagem.');
         return $result;
+      }else{
+        $files[$i]= $archiveName;
       }
           
     }
-    $result = array('status' => 'true', 'reason' => 'upload realizado com sucesso!');
-    return $result;
+    return $files;
   }
 
 ?>

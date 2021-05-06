@@ -136,12 +136,12 @@
 
 						<div class="control">
 							<label class="label">Digite o nome da Hospedagem: </label>
-							<input class="input" type="text" name="nome" placeholder="Hospedagem da Tia Ju" required/>
+							<input class="input" type="text" name="nome" placeholder="Hospedagem da Tia Ju" />
 						</div>
 
             <label class="label" for="cidade">Cidade:</label>
 						<div class="select">
-              <select name="cidade" id="cidade" required>
+              <select name="cidade" id="cidade" >
                 <option value="" disabled selected>Selecione:</option>
                 <?php
                   $query ="SELECT id_cidade, nome FROM cidades";
@@ -157,17 +157,17 @@
 
             <div class="control">
               <label class="label" for="tel-cel">Nº Contato:</label>
-              <input class="input" type="text" id="tel-cel" name="tel-cel" placeholder="(XX) 00000-0000"required/>
+              <input class="input" type="text" id="tel-cel" name="tel-cel" placeholder="(XX) 00000-0000"/>
             </div>
 
             <div class="control">
               <label class="label" for="email">E-mail da Hospedagem:</label>
-              <input class="input" type="email" id="email" name ="email" placeholder="hotel@gmail.com" required/>
+              <input class="input" type="email" id="email" name ="email" placeholder="hotel@gmail.com" />
             </div>
             
             <label class="label" for="tp_hosp">Tipo de Hospedagem:</label>
             <div class="select">
-                <select name="tp_hosp" id="tp_hosp" required>
+                <select name="tp_hosp" id="tp_hosp" >
                   <option value="" disabled selected>Selecione:</option>
                   <option value="0">Hotel</option>
                   <option value="1">Hostel</option>
@@ -178,11 +178,28 @@
 
 						<div class="control">
 							<label class="label">Foto:</label>
-							<input type="file" name="foto[]" multiple required>
+							<input type="file" name="foto[]" multiple >
+						</div>
+
+						<div>
+						<h5 class= "subtitle is-5"> 
+							<strong>Selecione os serviços oferecidos pela hospedagem:</br></strong>
+							<span style="color: red">*</span>(Caso não ofereça nenhuma das opções, favor deixa-lás vazias.)
+						</h5>
+					
+						<input type="checkbox" name="add[]" value="café"> <label for="cafe">Café da manhã |</label> 
+						<input type="checkbox" name="add[]" value="wi-fi"> <label for="wifi">Possui Wifi nas acomodações |</label> 
+						<input type="checkbox" name="add[]" value="animais"> <label for="animais"> Aceita animais de estimação |</label>
+						<input type="checkbox" name="add[]" value="piscina"> <label for="pisc">Possui Piscina |</label>
+						<input type="checkbox" name="add[]" value="sauna"> <label for="sauna">Sauna |</label>
+						<input type="checkbox" name="add[]" value="academia"> <label for="acad">Academia |</label>
+						<input type="checkbox" name="add[]" value="spa"> <label for="spa">Spa</label>
+
+						
 						</div>
 
 						<div class="botoes has-text-centered">
-							<input class="button is-success" type="submit" value="Cadastrar"/>
+							<input class="button is-success" name='submit' type="submit" value="Cadastrar"/>
 						</div>
 
 					</form>
@@ -190,8 +207,74 @@
 			</div>
 
       <?php
-        var_dump($_POST);
-        var_dump($_FILES);
+
+				if(isset($_FILES['foto'])) {
+					require_once '../../scripts/verifModules/photoValidation.php';
+
+					$result = photoValid($_FILES['foto']);
+
+					if(isset($result['status']) == 'false') {
+						echo "
+							<script>
+								alert('$result[reason]');
+								history.back();
+							</script>
+						";
+					} else {
+						require_once "../../scripts/php/conexao.php";
+						require_once "../../scripts/php/hospedagem/functions.php";
+
+						$hosp = insertHosp($conexao, $_POST['nome'], $_POST['cidade'], $_POST['tel-cel'], $_POST['email'], $_POST['tp_hosp']);
+
+						if ($hosp) {
+							$ultimoId = mysqli_insert_id($conexao);
+							foreach ($_POST['add'] as $key) {
+								$add = insertAdd($conexao, $ultimoId, $key);
+								if (!$add) {
+									break;
+								}
+							}
+
+							foreach ($result as $img){
+								$foto = insertPhoto($conexao, $ultimoId, $img);
+								if (!$foto) {
+									break;
+								}
+							}
+
+							if ($foto) {
+								echo "
+									<script>
+										alert('HOSPEDAGEM CADASTRADA COM SUCESSO');
+									</script>
+							";
+							}else{
+								echo "
+									<script>
+										alert('DEU MUITO RUIM, RUIM DEMAIS, PÉSSIMO, HORRÍVEL, NÍVEL DBA');
+										history.back();
+									</script>
+								";
+							}
+							
+						}
+					}
+
+				}
+/* 
+				if (isset($_POST['submit'])) {
+
+					$hospedagem = insertHosp($conexao, $_POST['nome'], $_POST['cidade'], $_POST['tel-cel'], $_POST['email'], $_POST['tp_hosp']);
+
+					if ($hospedagem==1 && $add==1) {
+						echo"
+							Hospedagem cadastrada com sucesso!
+						";
+					}else{
+						echo "WASTED";
+					}
+				} */
+
       ?>
 		</section>
 	</main>
