@@ -1,6 +1,6 @@
 <?php
-  function insertHosp($conexao, $nome, $cidade, $telcel, $email, $tp){
-    $insert = $conexao -> query("INSERT INTO hospedagem (tt_hosp,	city_hosp,	tel_hosp,	email_hosp,	tp_hosp) VALUES ('$nome', '$cidade', '$telcel', '$email', $tp) ");
+  function insertHosp($conexao, $nome, $endereco, $cidade, $telcel, $email, $tp){
+    $insert = $conexao -> query("INSERT INTO hospedagem (tt_hosp, end_hosp,	city_hosp,	tel_hosp,	email_hosp,	tp_hosp) VALUES ('$nome', '$endereco','$cidade', '$telcel', '$email', $tp) ");
     if ($insert==1) {
       return true;
     }else{

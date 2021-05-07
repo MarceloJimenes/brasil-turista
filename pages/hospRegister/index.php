@@ -136,8 +136,13 @@
 
 						<div class="control">
 							<label class="label">Digite o nome da Hospedagem: </label>
-							<input class="input" type="text" name="nome" placeholder="Hospedagem da Tia Ju" />
+							<input class="input" type="text" name="nome" placeholder="Resort da Tia Ju" />
 						</div>
+
+						<div class="control">
+							<label class="label">Endereço: </label>
+							<input class="input" type="text" name="end_hosp" placeholder="Rua / Nº / Bairro" />
+						</div> 
 
             <label class="label" for="cidade">Cidade:</label>
 						<div class="select">
@@ -225,7 +230,7 @@
 						require_once "../../scripts/php/conexao.php";
 						require_once "../../scripts/php/hospedagem/functions.php";
 
-						$hosp = insertHosp($conexao, $_POST['nome'], $_POST['cidade'], $_POST['tel-cel'], $_POST['email'], $_POST['tp_hosp']);
+						$hosp = insertHosp($conexao, $_POST['nome'], $_POST['end_hosp'], $_POST['cidade'], $_POST['tel-cel'], $_POST['email'], $_POST['tp_hosp']);
 
 						if ($hosp) {
 							$ultimoId = mysqli_insert_id($conexao);
