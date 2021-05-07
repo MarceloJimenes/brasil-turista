@@ -68,21 +68,22 @@ function getHosp($conexao, $idHosp) {
 
     echo "
 
-    <div class='info'>
-      <h1>$data[tt_hosp]</h1>
-      <p>localizada em: <span>$city[nome].</span></p>
-      <p>tipo de hospedagem: $type.<p>
-      <p>adicionais: ".$addList.".</p>
-      <p>número de quartos: ".$counterRoom."</p>
+      <div class='info'>
+        <h1>$data[tt_hosp]</h1>
+        <p>localizada em: <span>$city[nome].</span></p>
+        <p>Endereço: $data[end_hosp]</p>
+        <p>tipo de hospedagem: $type.<p>
+        <p>adicionais: ".$addList.".</p>
+        <p>número de quartos: ".$counterRoom."</p>
 
-      <div class='contato'>
-        <h3>contato</h3>
-        <p>telefone: $data[tel_hosp]</p>
-        <p>email: $data[email_hosp]</p>
+        <div class='contato'>
+          <h3>contato</h3>
+          <p>telefone: $data[tel_hosp]</p>
+          <p>email: $data[email_hosp]</p>
+        </div>
+
+
       </div>
-
-
-    </div>
 
     ";
 

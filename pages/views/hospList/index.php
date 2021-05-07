@@ -22,6 +22,7 @@
       
 
       for($i = 1; $i <= $counter; $i++) {
+        //box da hospedagem
         echo "<div>";
         getHosp($conexao, $i);
         echo "</div>";
