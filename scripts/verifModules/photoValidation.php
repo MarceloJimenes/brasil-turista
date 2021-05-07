@@ -1,6 +1,6 @@
 <?php
   //essa função espera o parâmetro $FILES['name_do_input']
-  function photoValid($fileName) {
+  function photoValid($fileName, $flag) {
 
     $countFiles = count($fileName['name']);
 
@@ -37,10 +37,16 @@
       
       $extension = explode(".", $fileName["name"][$i]);
       $archiveName = md5(uniqid(time())).".".$extension[1];
-      $up = move_uploaded_file($fileName["tmp_name"][$i], "../../img/fotos_hosp/".$archiveName);
+      
+      if ($flag==0) {
+        $up = move_uploaded_file($fileName["tmp_name"][$i], "../../img/fotos_hosp/".$archiveName);
+      }else {
+        $up = move_uploaded_file($fileName["tmp_name"][$i], "../../img/fotos_quarto/".$archiveName);
+      }
+      
 
       if (!$up) {
-        $result = array('status' => 'false', 'reason' => 'Erro na tentaiva de upload da imagem.');
+        $result = array('status' => 'false', 'reason' => 'Erro na tentativa de upload da imagem.');
         return $result;
       }else{
         $files[$i]= $archiveName;

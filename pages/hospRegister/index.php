@@ -199,7 +199,8 @@
 						</div>
 
 						<div class="botoes has-text-centered">
-							<input class="button is-success" name='submit' type="submit" value="Cadastrar"/>
+							<input type='text' hidden name='flag' value='0'/>
+							<input class="button is-success" name="submit" type="submit" value="Cadastrar"/>
 						</div>
 
 					</form>
@@ -211,7 +212,7 @@
 				if(isset($_FILES['foto'])) {
 					require_once '../../scripts/verifModules/photoValidation.php';
 
-					$result = photoValid($_FILES['foto']);
+					$result = photoValid($_FILES['foto'], $_POST['flag']);
 
 					if(isset($result['status']) == 'false') {
 						echo "

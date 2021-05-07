@@ -73,6 +73,9 @@
                   <a class="navbar-item" id="hosp-register" href="../hospRegister/index.php">
                     Cadastrar Hospedagem
                   </a>
+                  <a class="navbar-item" id="room-register" href="../roomRegister/index.php">
+                    Cadastrar quarto
+                  </a>
                   <a class="navbar-item" id="city-register" href="../cityRegister/cadastro_cidade.php">
                     Cadastrar cidade
                   </a>

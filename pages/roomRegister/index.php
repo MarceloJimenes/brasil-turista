@@ -9,6 +9,9 @@
 	<link rel="stylesheet" href="../../styles/form.scss">
 
 	<title>Cadastro de Quartos</title>
+	<style>
+
+	</style>
 </head>
 
 <body>
@@ -133,19 +136,19 @@
 
 						<div class="control">
 							<label class="label">Digite o nome do Quarto: </label>
-							<input class="input" type="text" name="nome" placeholder="Hospedagem da Tia Ju" required/>
+							<input class="input" type="text" name="nome" placeholder="Albergue do DBA" s/>
 						</div>
 
-            <label class="label" for="cidade">Cidade:</label>
+            <label class="label" for="hosp">Hospedagem:</label>
 						<div class="select">
-              <select name="cidade" id="cidade" required>
+              <select name="id_hosp" id="hosp">
                 <option value="" disabled selected>Selecione:</option>
                 <?php
-                  $query ="SELECT id_cidade, nome FROM cidades";
+                  $query ="SELECT id_hosp, tt_hosp FROM hospedagem";
                   $dados = mysqli_query($conexao, $query);
-                  while($cidades = mysqli_fetch_array($dados)){
+                  while($hospedagem = mysqli_fetch_array($dados)){
                     echo"
-                      <option value='$cidades[id_cidade]'>$cidades[nome]</option>
+                      <option value='$hospedagem[id_hosp]'>$hospedagem[tt_hosp]</option>
                     ";
                   }
                 ?>
@@ -153,32 +156,38 @@
             </div>
 
             <div class="control">
-              <label class="label" for="tel-cel">Nº Contato:</label>
-              <input class="input" type="text" id="tel-cel" name="tel-cel" placeholder="(XX) 00000-0000"required/>
+              <label class="label" for="valor">Valor da diária: </label>
+              <input class="input" type="text" id="valor" name="valor" placeholder="R$ 30,00"s/>
             </div>
 
             <div class="control">
-              <label class="label" for="email">E-mail da Hospedagem:</label>
-              <input class="input" type="email" id="email" name ="email" placeholder="hotel@gmail.com" required/>
+              <label class="label" for="camas">Quantidade de camas: </label>
+              <input class="input" type="number" id="camas" name ="camas" maxlength="2" s/>
             </div>
             
-            <label class="label" for="tp_hosp">Tipo de Hospedagem:</label>
-            <div class="select">
-                <select name="tp_hosp" id="tp_hosp" required>
-                  <option value="" disabled selected>Selecione:</option>
-                  <option value="0">Hotel</option>
-                  <option value="1">Hostel</option>
-                  <option value="2">Pousada</option>
-                  <option value="3">Resort</option>
-                </select>
-            </div>
-
 						<div class="control">
 							<label class="label">Foto:</label>
-							<input type="file" name="foto[]" multiple required>
+							<input type="file" name="foto[]" multiple s>
+						</div>
+						
+
+						<div>
+							<h5 class= "subtitle is-5"> 
+								<strong>Informe se o quarto possui os seguintes adicionais:</br></strong>
+								<span style="color: red">*</span>(Caso não ofereça nenhuma das opções, favor deixa-lás vazias.)
+							</h5>
+						
+							<input type="checkbox" name="add[]" value="ar-condicionado"> <label for="cafe">Ar condicionado|</label> 
+							<input type="checkbox" name="add[]" value="calefação"> <label for="wifi">Possui calefação |</label> 
+							<input type="checkbox" name="add[]" value="lareira"> <label for="animais"> Possui lareira|</label>
+							<input type="checkbox" name="add[]" value="frigobar"> <label for="pisc"> Dispõe de Frigobar |</label>
+							<input type="checkbox" name="add[]" value="secador de cabelo"> <label for="sauna">Secador de cabelo |</label>
+							<input type="checkbox" name="add[]" value="TV a cabo"> <label for="acad">TV a cabo |</label>
 						</div>
 
+
 						<div class="botoes has-text-centered">
+						<input type='text' hidden name='flag' value='1'/>
 							<input class="button is-success" type="submit" value="Cadastrar"/>
 						</div>
 
@@ -187,8 +196,62 @@
 			</div>
 
       <?php
-        var_dump($_POST);
-        var_dump($_FILES);
+        if(isset($_FILES['foto'])) {
+					require_once '../../scripts/verifModules/photoValidation.php';
+
+					$result = photoValid($_FILES['foto'], $_POST['flag']);
+
+					if(isset($result['status']) == 'false') {
+						echo "
+							<script>
+								alert('$result[reason]');
+								history.back();
+							</script>
+						";
+					} else {
+						require_once "../../scripts/php/conexao.php";
+						require_once "../../scripts/php/quartos/functions.php";
+
+						$quarto = insertRoom($conexao, $_POST['id_hosp'], $_POST['nome'], $_POST['valor'], $_POST['camas']);
+
+						if ($quarto) {
+							echo "
+								<script>alert('O ERRO É AQUI')</script>
+							";exit;
+							$ultimoId = mysqli_insert_id($conexao);
+							foreach ($_POST['add'] as $key) {
+								$add = insertAddRoom($conexao, $ultimoId, $key);
+								if (!$add) {
+									break;
+								}
+							}
+
+							foreach ($result as $img){
+								$foto = insertPhotoRoom($conexao, $ultimoId, $img);
+								if (!$foto) {
+									break;
+								}
+							}
+
+							if ($foto) {
+								echo "
+									<script>
+										alert('QUARTO CADASTRADO COM SUCESSO');
+									</script>
+							";
+							}else{
+								echo "
+									<script>
+										alert('DEU MUITO RUIM, RUIM DEMAIS, PÉSSIMO, HORRÍVEL, NÍVEL DBA');
+										history.back();
+									</script>
+								";
+							}
+							
+						}
+					}
+
+				}
       ?>
 		</section>
 	</main>
