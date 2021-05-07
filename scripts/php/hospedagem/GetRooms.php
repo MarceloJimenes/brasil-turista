@@ -12,7 +12,7 @@ function getRooms($conexao, $idHosp) {
 
   $getRooms = $conexao -> query("select * from quarto where id_hosp=".$idHosp);
 
-  //regatando id do quarto
+  //resgatando id do quarto
   $idRoom = $getRooms ->  fetch_array();
 
   //querys 
@@ -45,10 +45,10 @@ function getRooms($conexao, $idHosp) {
   echo "
 
     <div class='info'>
-      <h1>$idRoom[tt_quarto]</h1>
-      <p>Valor: R$$idRoom[vl_quarto]</p>
-      <p>adicionais: ".$addList.".</p>
-      <p>camas: ".$idRoom['qt_camas']."</p>
+      <h1 class = 'title'>$idRoom[tt_quarto]</h1>
+      <p><strong>Valor:</strong> R$$idRoom[vl_quarto]</p>
+      <p><strong>Adicionais:</strong> ".$addList.".</p>
+      <p><strong>Camas:</strong> ".$idRoom['qt_camas']."</p>
     </div>
 
   ";
