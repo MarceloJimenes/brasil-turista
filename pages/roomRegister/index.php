@@ -136,7 +136,7 @@
 
 						<div class="control">
 							<label class="label">Digite o nome do Quarto: </label>
-							<input class="input" type="text" name="nome" placeholder="Albergue do DBA" s/>
+							<input class="input" type="text" name="nome"  />
 						</div>
 
             <label class="label" for="hosp">Hospedagem:</label>
@@ -157,17 +157,17 @@
 
             <div class="control">
               <label class="label" for="valor">Valor da diária: </label>
-              <input class="input" type="text" id="valor" name="valor" placeholder="R$ 30,00"s/>
+              <input class="input" type="text" id="valor" name="valor" placeholder="R$ 30,00"/>
             </div>
 
             <div class="control">
               <label class="label" for="camas">Quantidade de camas: </label>
-              <input class="input" type="number" id="camas" name ="camas" maxlength="2" s/>
+              <input class="input" type="number" id="camas" name ="camas" maxlength="2" />
             </div>
             
 						<div class="control">
 							<label class="label">Foto:</label>
-							<input type="file" name="foto[]" multiple s>
+							<input type="file" name="foto[]" multiple >
 						</div>
 						
 
