@@ -56,6 +56,10 @@
                     Página inicial
                   </a>
 
+                  <a class="navbar-item" href="pages/views/hospList">
+                    Hospedagens
+                  </a>
+
                   <a class="navbar-item" id="city-register" href="pages/cityRegister/cadastro_cidade.php">
                     Cadastrar cidade
                   </a>
