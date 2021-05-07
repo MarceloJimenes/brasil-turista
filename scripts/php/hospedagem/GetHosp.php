@@ -1,37 +1,91 @@
 <?php
 
-function getHosp($conexao) {
+function quantHosp($conexao) {
+  $sql = $conexao -> query("select tt_hosp from hospedagem");
 
-  $sql = $conexao -> query 
-  ("
-    select 
-    
-    add_quarto.tt_add as tt_add_quarto, add_hosp.tt_add as tt_add_hosp,
-    fotos_quarto.id_foto as id_foto_quarto, fotos_hosp.id_foto as id_foto_hosp,
-    fotos_quarto.tt_foto as tt_foto_quarto, fotos_hosp.tt_foto as tt_foto_hosp,
-    tt_hosp, city_hosp,tel_hosp, email_hosp, tp_hosp, hospedagem.id_hosp as id_hospedagem,
-    quarto.id_quarto as id_room, tt_quarto, vl_quarto, qt_camas   
+  $result = mysqli_num_rows($sql);
 
-    from hospedagem
-    inner join quarto
-    on quarto.id_hosp = hospedagem.id_hosp
-    inner join fotos_hosp
-    on fotos_hosp.id_hosp = hospedagem.id_hosp
-    inner join fotos_quarto
-    on fotos_quarto.id_quarto = quarto.id_quarto
-    inner join add_hosp
-    on add_hosp.id_hosp = hospedagem.id_hosp
-    inner join add_quarto
-    on add_quarto.id_quarto = quarto.id_quarto
-  ");
+  return $result;
+}
 
-  if(mysqli_num_rows($sql) > 0) {
+function getHosp($conexao, $idHosp) {
 
-    $data = array();
+  //querys hospedagem
+  $gethosp = $conexao -> query("select * from hospedagem where id_hosp=".$idHosp);
+  $getAddHosp = $conexao -> query("select * from add_hosp where id_hosp=".$idHosp);
+  $getHospPhotos = $conexao -> query("select * from fotos_hosp where id_hosp=".$idHosp);
+  $getRoom= $conexao -> query("select tt_quarto from quarto where id_hosp=".$idHosp);
 
-    $data = $sql -> fetch_array();
-    
-    echo json_encode($data);
+  $add = array();
+
+  while($i = $getAddHosp -> fetch_array()) {
+    $add[] = $i['tt_add'];
+  }
+
+  $addList = implode(", ", $add);
+
+  $counterRoom = mysqli_num_rows($getRoom);
+  
+
+
+  if(mysqli_num_rows($gethosp) > 0) {
+
+    if(mysqli_num_rows($getHospPhotos) > 0) {
+
+      echo "<div class='galeria'>";
+
+        while($fotos = $getHospPhotos -> fetch_array()) {
+          echo "<img src='../../../img/fotos_hosp/$fotos[tt_foto]' width='420px' height='250px' style='object-fit: cover; margin: 10px;' class='foto'>";
+        }
+
+      echo"</div>";
+
+    }
+
+    $data = $gethosp -> fetch_assoc();
+
+    $getHospCity = $conexao -> query("select nome from cidades where id_cidade = ".$data["city_hosp"]);
+
+    $city = $getHospCity -> fetch_assoc();
+
+    switch ($data['tp_hosp']) {
+      case 1:
+        $type = "Hostel";
+      break;
+
+      case 2:
+        $type = "Pousada";
+      break;
+
+      case 3:
+        $type = "Resort";
+      break;
+      
+      default:
+        $type = "Hotel";
+      break;
+    }
+
+    echo "
+
+    <div class='info'>
+      <h1>$data[tt_hosp]</h1>
+      <p>localizada em: <span>$city[nome].</span></p>
+      <p>tipo de hospedagem: $type.<p>
+      <p>adicionais: ".$addList.".</p>
+      <p>número de quartos: ".$counterRoom."</p>
+
+      <div class='contato'>
+        <h3>contato</h3>
+        <p>telefone: $data[tel_hosp]</p>
+        <p>email: $data[email_hosp]</p>
+      </div>
+
+
+    </div>
+
+    ";
+
 
   } else {
     echo "Nenhuma hospedagem cadastrada!";
