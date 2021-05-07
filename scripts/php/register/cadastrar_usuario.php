@@ -64,7 +64,7 @@
 						function error() {
 							Swal.fire({
 								icon: "error",
-								title: "registro irrugular",
+								title: "registro irregular",
 								footer: "O e-mail digitado está incorreto, verifique e tente novamente!",
 								showConfirmButton: false,
 								timer: 5000,

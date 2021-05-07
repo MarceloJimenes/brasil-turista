@@ -92,6 +92,8 @@
                         <script>
                           document.querySelector("#city-register").style.display = "none";
                           document.querySelector("#pt-register").style.display = "none";
+                          document.querySelector("#hosp-register").style.display = "none";
+                          document.querySelector("#room-register").style.display = "none";
                         </script>
                       ';
                     }

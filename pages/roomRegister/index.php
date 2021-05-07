@@ -94,20 +94,20 @@
 						<div id="navbarMenuHeroC" class="navbar-menu">
 							<div class="navbar-end">
 								
-								<a class="navbar-item" href="../../index.php">
+						  	<a class="navbar-item" href="../../index.php">
 									Página inicial
 								</a>
-								
-								<a class="navbar-item" href="#">
+								<a class="navbar-item" id="hosp-register" href="../hospRegister/index.php">
+									Cadastrar Hospedagem
+								</a>
+								<a class="navbar-item" id="city-register" href="../cityRegister/cadastro_cidade.php">
 									Cadastrar cidade
 								</a>
-								
-								<a class="navbar-item">
+								<a class="navbar-item" id="pt-register">
 									Cadastrar Ponto Turístico
 								</a>
-								
-								<a class="navbar-item" href="../userPerfil/perfil.php">
-									Meu Perfil
+								<a class="navbar-item" href="../../scripts/php/logout/index.php">
+									Logout
 								</a>
 
 								<!-- botao para download -->
