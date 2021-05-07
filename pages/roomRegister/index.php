@@ -215,9 +215,6 @@
 						$quarto = insertRoom($conexao, $_POST['id_hosp'], $_POST['nome'], $_POST['valor'], $_POST['camas']);
 
 						if ($quarto) {
-							echo "
-								<script>alert('O ERRO É AQUI')</script>
-							";exit;
 							$ultimoId = mysqli_insert_id($conexao);
 							foreach ($_POST['add'] as $key) {
 								$add = insertAddRoom($conexao, $ultimoId, $key);

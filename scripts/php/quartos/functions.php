@@ -1,6 +1,6 @@
 <?php
   function insertRoom($conexao, $id_hosp, $tt, $value, $qtdcamas){
-    $insert = $conexao -> query("INSERT INTO quarto (id_hosp, tt_quarto, vl_quarto, qt_camas) VALUES ($id_hosp, '$tt', $value, '$qtdcamas')");
+    $insert = $conexao -> query("INSERT INTO quarto (id_hosp, tt_quarto, vl_quarto, qt_camas) VALUES ($id_hosp, '$tt', $value, $qtdcamas)");
     if ($insert) {
       return true;
     }else {
