@@ -7,7 +7,7 @@
 
   <link rel="stylesheet" href="style.css">
 
-  <title>Document</title>
+  <title>Hospedagens</title>
 
 </head>
 <body>
@@ -23,9 +23,9 @@
 
       for($i = 1; $i <= $counter; $i++) {
         //box da hospedagem
-        echo "<div>";
+        echo "<a href='../roomList/index.php?id=$i'><div class='box'>";
         getHosp($conexao, $i);
-        echo "</div>";
+        echo "</div></a>";
       }
     } else {
       echo "Nenhuma hospedagem cadastrada";

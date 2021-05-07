@@ -35,7 +35,7 @@ function getHosp($conexao, $idHosp) {
       echo "<div class='galeria'>";
 
         while($fotos = $getHospPhotos -> fetch_array()) {
-          echo "<img src='../../../img/fotos_hosp/$fotos[tt_foto]' width='420px' height='250px' style='object-fit: cover; margin: 10px;' class='foto'>";
+          echo "<img src='../../../img/fotos_hosp/$fotos[tt_foto]' class='foto'>";
         }
 
       echo"</div>";
@@ -68,18 +68,18 @@ function getHosp($conexao, $idHosp) {
 
     echo "
 
-      <div class='info'>
-        <h1>$data[tt_hosp]</h1>
-        <p>localizada em: <span>$city[nome].</span></p>
-        <p>Endereço: $data[end_hosp]</p>
-        <p>tipo de hospedagem: $type.<p>
-        <p>adicionais: ".$addList.".</p>
-        <p>número de quartos: ".$counterRoom."</p>
+      <div class='info' >
+        <h1 class='title'>$data[tt_hosp]</h1>
+        <p><strong>Localizada em:</strong> <span>$city[nome].</span></p>
+        <p><strong>Endereço:</strong> $data[end_hosp]</p>
+        <p><strong>Tipo de Hospedagem:</strong> $type.<p>
+        <p><strong>Adicionais:</strong> ".$addList.".</p>
+        <p><strong>Número de Quartos:</strong> ".$counterRoom."</p>
 
         <div class='contato'>
-          <h3>contato</h3>
-          <p>telefone: $data[tel_hosp]</p>
-          <p>email: $data[email_hosp]</p>
+          <h3>Contato</h3>
+          <p><strong>Telefone:</strong> $data[tel_hosp]</p>
+          <p><strong>Email:</strong> $data[email_hosp]</p>
         </div>
 
 
