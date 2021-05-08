@@ -68,7 +68,7 @@ function getHosp($conexao, $idHosp) {
 
     echo "
 
-      <div class='info' >
+      <div class='info' style='padding: 15px;' >
         <h1 class='title'>$data[tt_hosp]</h1>
         <p><strong>Localizada em:</strong> <span>$city[nome].</span></p>
         <p><strong>Endereço:</strong> $data[end_hosp]</p>

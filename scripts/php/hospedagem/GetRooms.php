@@ -12,46 +12,53 @@ function getRooms($conexao, $idHosp) {
 
   $getRooms = $conexao -> query("select * from quarto where id_hosp=".$idHosp);
 
-  //resgatando id do quarto
-  $idRoom = $getRooms ->  fetch_array();
+  while($quartos = $getRooms ->  fetch_array()){
+    $idRoom = $quartos;
+    //querys 
+    $getAddRoom = $conexao -> query("select * from add_quarto where id_quarto=".$idRoom['id_quarto']);
+    $getRoomPhotos = $conexao -> query("select * from fotos_quarto where id_quarto=".$idRoom['id_quarto']);
 
-  //querys 
-  $getAddRoom = $conexao -> query("select * from add_quarto where id_quarto=".$idRoom['id_quarto']);
-  $getRoomPhotos = $conexao -> query("select * from fotos_quarto where id_quarto=".$idRoom['id_quarto']);
+
+    if(mysqli_num_rows($getRoomPhotos) > 0) {
+
+      echo "<div class = 'box'>";
+
+      echo "<div class='galeria'>";
+
+        while($fotos = $getRoomPhotos -> fetch_array()) {
+          echo "<img src='../../../img/fotos_quarto/$fotos[tt_foto]' class='foto'>";
+        }
+
+      echo"</div>";
+
+    }
 
 
-  if(mysqli_num_rows($getRoomPhotos) > 0) {
 
-    echo "<div class='galeria'>";
+    $add = array();
 
-      while($fotos = $getRoomPhotos -> fetch_array()) {
-        echo "<img src='../../../img/fotos_quarto/$fotos[tt_foto]' class='foto'>";
-      }
+    while($i = $getAddRoom -> fetch_array()) {
+      $add[] = $i['tt_add'];
+    }
 
-    echo"</div>";
+    $addList = implode(", ", $add);
+
+    echo "
+
+      <div class='info' style='padding: 15px;'>
+        <h1 class = 'title'>$idRoom[tt_quarto]</h1>
+        <p><strong>Valor:</strong> R$$idRoom[vl_quarto]</p>
+        <p><strong>Adicionais:</strong> ".$addList.".</p>
+        <p><strong>Camas:</strong> ".$idRoom['qt_camas']."</p>
+      </div>
+
+    ";
+
+    echo "</div>";
 
   }
 
-
-
-  $add = array();
-
-  while($i = $getAddRoom -> fetch_array()) {
-    $add[] = $i['tt_add'];
-  }
-
-  $addList = implode(", ", $add);
-
-  echo "
-
-    <div class='info'>
-      <h1 class = 'title'>$idRoom[tt_quarto]</h1>
-      <p><strong>Valor:</strong> R$$idRoom[vl_quarto]</p>
-      <p><strong>Adicionais:</strong> ".$addList.".</p>
-      <p><strong>Camas:</strong> ".$idRoom['qt_camas']."</p>
-    </div>
-
-  ";
+  
 
 
     

@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="../../styles/backgrounds.scss">
 	<link rel="stylesheet" href="../../styles/form.scss">
 
-	<title>Cadastro de Cidade</title>
+	<title>Cadastro de Hospedagem</title>
 </head>
 
 <body>

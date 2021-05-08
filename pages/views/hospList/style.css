@@ -18,7 +18,7 @@
   opacity: 0;
   animation-name: animacao;
   text-decoration: underline;
-  animation-duration: 20s;
+  animation-duration: 12s;
   animation-iteration-count: infinite;
   object-fit: cover;
   /* margin: 10px; */
@@ -27,23 +27,28 @@
 }
 
 @keyframes animacao{
-  25%{
-    opacity: 1;
-    transform: scale(1.1, 1.1);
+    25%{
+      opacity: 1;
+      transform: scale(1.1, 1.1);
+    }
+  
+    50%{
+      opacity: 0.5;
+    }
   }
 
-  50%{
-    opacity: 0;
+  .foto:nth-child(1){
+    animation-delay: 0s;
   }
-}
 
-.foto:nth-child(2){
-  animation-delay: 5s;
-}
-
-.foto:nth-child(3){
-  animation-delay: 8s;
-}
+  .foto:nth-child(2){
+    animation-delay: 4s;
+  }
+  
+  .foto:nth-child(3){
+    animation-delay: 8s;
+  }
+  
 
 .info {
   
