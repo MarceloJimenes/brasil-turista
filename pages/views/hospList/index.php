@@ -114,7 +114,7 @@
     $counter = quantHosp($conexao);
 
     if($counter > 0) {
-      
+        
 
       for($i = 1; $i <= $counter; $i++) {
         //box da hospedagem
